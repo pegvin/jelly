@@ -1,0 +1,53 @@
+name: Build
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  lint-build-sh:
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install ShellCheck
+      run: |
+        sudo apt-get update -y
+        sudo apt-get install shellcheck -y
+
+    - name: Lint
+      run: shellcheck --shell=sh --exclude=SC2086 --norc ./build.sh;
+
+  build-linux:
+    strategy:
+      matrix:
+        cc: [gcc, clang]
+
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update -y
+        sudo apt-get gcc clang libcmark-dev -y
+
+    - name: Generate Build Files & Build
+      env:
+        CC: "${{ matrix.cc == 'gcc' && 'gcc' || 'clang' }}"
+        CXX: "${{ matrix.cc == 'gcc' && 'g++' || 'clang++' }}"
+        LD: "${{ matrix.cc == 'gcc' && 'g++' || 'clang++' }}"
+      run: |
+        ./build.sh release
+
+    - name: Run
+      run: ./build/jelly
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-linux-${{ matrix.cc }}
+        if-no-files-found: error
+        path: ./build/jelly
