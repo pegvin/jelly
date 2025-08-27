@@ -31,8 +31,8 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        sudo apt-get update -y
-        sudo apt-get gcc clang libcmark-dev -y
+        sudo apt update -y
+        sudo apt install -y gcc clang libcmark-dev
 
     - name: Generate Build Files & Build
       env:
