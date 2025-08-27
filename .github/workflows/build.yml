@@ -37,8 +37,7 @@ jobs:
     - name: Generate Build Files & Build
       env:
         CC: "${{ matrix.cc == 'gcc' && 'gcc' || 'clang' }}"
-        CXX: "${{ matrix.cc == 'gcc' && 'g++' || 'clang++' }}"
-        LD: "${{ matrix.cc == 'gcc' && 'g++' || 'clang++' }}"
+        LD: "${{ matrix.cc == 'gcc' && 'gcc' || 'clang' }}"
       run: |
         ./build.sh release
 

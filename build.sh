@@ -11,10 +11,10 @@ CFLAGS="-Isrc/ -std=c99 -Wall -Wextra -Wshadow -pedantic -ffast-math"
 LFLAGS="$(pkg-config --libs libcmark)"
 CMD=${1:-}
 
-mkdir -p $BUILD "$BUILD/.ccache"
+mkdir -p "$BUILD" "$BUILD/.ccache"
 
 if [ "$CMD" = "clean" ]; then
-	rm -rf $BUILD
+	rm -rf "$BUILD"
 	exit 0
 elif [ "$CMD" = "bear" ]; then
 	bear --append --output "$BUILD/compile_commands.json" -- $0 # github.com/rizsotto/Bear
