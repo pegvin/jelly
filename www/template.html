@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:site_name" content="Jelly">
+	<meta property="og:type" content="website">
+	<meta property="og:image" content="/favicon.png">
+	<link rel="icon" type="image/png" href="/favicon.png" />
+	<title>{{title}}</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
+
+		* {
+			margin: 0;
+			box-sizing: border-box;
+			font-feature-settings: kern;
+			font-kerning: normal;
+			text-rendering: optimizeLegibility;
+			scroll-behavior: smooth;
+		}
+
+		:root {
+			--fg: #000;
+			--bg: #FFF;
+			--link-fg: blue;
+			--code-fg: #000;
+			--code-bg: #F8F8F8;
+			--code-border: #BBB;
+			--pre-border: #AAA;
+			--footer-border: #000;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			:root {
+				--fg: #D7DADC;
+				--bg: #0A0A0A;
+				--link-fg: #3EFF4A;
+				--code-fg: #D7DADC;
+				--code-bg: #222;
+				--code-border: #444;
+				--pre-border: #444;
+				--footer-border: #555;
+			}
+		}
+
+		body {
+			color: var(--fg);
+			background: var(--bg);
+			max-width: 50ch;
+			margin: 0 auto;
+			padding: 0 0.75rem;
+			padding-bottom: 1rem;
+			font-size: 100%;
+			font-family: "IBM Plex Sans", sans-serif;
+			line-height: 1.65;
+			tab-size: 4;
+			white-space: normal;
+			word-break: break-word;
+			overflow-wrap: break-word;
+			hyphens: none;
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			margin-top: 1.5rem;
+			font-family: "Inter Tight", sans-serif;
+		}
+
+		h1 { font-size: 1.75rem; }
+		h2 { font-size: 1.25rem; letter-spacing: 0.5px; }
+		h3 { font-size: 1rem; letter-spacing: 1px; }
+
+		p {
+			margin-top: 1rem;
+		}
+
+		h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p {
+			margin-top: 0.25rem;
+		}
+
+		ul, ol {
+			margin-top: 0.75rem;
+		}
+		p + ul, p + ol {
+			margin-top: 0.25rem;
+		}
+
+		nav {
+			text-align: right;
+			margin-top: 0.5rem;
+			font-family: "IBM Plex Mono", monospace;
+		}
+
+		nav a:not(:last-of-type) {
+			margin-right: 0.5rem;
+		}
+
+		footer {
+			font-family: "IBM Plex Mono", monospace;
+			margin-top: 1rem;
+			border-top: 1px solid var(--footer-border);
+			text-align: center;
+			font-size: 75%;
+		}
+
+		a, a:visited {
+			color: var(--link-fg);
+			text-underline-offset: 15%;
+			text-decoration: underline;
+			text-decoration-color: var(--link-fg);
+		}
+		a:hover {
+			text-decoration: none;
+		}
+
+		pre, code {
+			font-family: "IBM Plex Mono", monospace;
+		}
+
+		pre {
+			margin-top: 1rem;
+			overflow: auto;
+			font-size: 100%;
+			line-height: 1.5;
+
+			padding: 0.5rem 0;
+			padding-left: 0.5rem;
+
+			border: 1px solid var(--pre-border);
+			color: var(--code-fg) !important;
+			background: var(--code-bg) !important;
+		}
+
+		pre code {
+			display: inline-block !important;
+			margin-right: 0.5rem !important;
+			background: none !important;
+			padding: 0 !important;
+		}
+
+		code:not(pre code) {
+			font-size: 0.9rem;
+			white-space: nowrap;
+			padding: 0rem 0.25rem;
+			color: var(--code-fg);
+			background: var(--code-bg);
+			border: 1px solid var(--code-border);
+		}
+	</style>
+</head>
+<body>
+	<nav>
+		<a href="https://github.com/pegvin/jelly">Source</a>
+	</nav>
+	<main>
+		<h1>{{title}}</h1>
+		{{content}}
+	</main>
+	<footer>
+		<p>The contents of the page are licensed under <a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Public Domain License</a> unless mentioned otherwise.</p>
+	</footer>
+</body>
+</html>
