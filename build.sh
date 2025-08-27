@@ -30,7 +30,7 @@ elif [ "$CMD" = "serve" ]; then
 	exit 0
 elif [ "$CMD" = "deploy" ]; then
 	./build/jelly
-	minhtml --keep-closing-tags --minify-css --minify-js --keep-spaces-between-attributes --keep-input-type-text-attr --keep-html-and-head-opening-tags $(find www-build/ -type f -name "*.html") >/dev/null # https://github.com/wilsonzlin/minify-html/
+	minhtml --keep-closing-tags --minify-css --minify-js --keep-spaces-between-attributes --keep-input-type-text-attr --keep-html-and-head-opening-tags "$(find www-build/ -type f -name "*.html")" >/dev/null # https://github.com/wilsonzlin/minify-html/
 	npx surge www-build/ "https://jellyc.surge.sh"
 	exit 0
 elif [ "$CMD" ]; then
@@ -43,7 +43,7 @@ if [ -x "$(command -v mold)" ]; then LFLAGS="$LFLAGS -fuse-ld=mold"; fi
 
 export CCACHE_DIR="$BUILD/.ccache"
 
-echo "$SOURCES 0" | tr ' ' '\n' | while read source; do
+echo "$SOURCES 0" | tr ' ' '\n' | while read -r source; do
 	if [ "$source" = "0" ]; then wait; exit 0; fi
 	echo "Compiling $source"
 	mkdir -p "$(dirname "$BUILD/$source.o")"
