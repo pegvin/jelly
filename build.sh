@@ -47,7 +47,7 @@ echo "$SOURCES 0" | tr ' ' '\n' | while read -r source; do
 	if [ "$source" = "0" ]; then wait; exit 0; fi
 	echo "Compiling $source"
 	mkdir -p "$(dirname "$BUILD/$source.o")"
-	"$CCACHE" "$CC" $CFLAGS -c "$source" -o "$BUILD/$source.o" &
+	$CCACHE "$CC" $CFLAGS -c "$source" -o "$BUILD/$source.o" &
 done
 
 "$LD" $OBJECTS $LFLAGS -o "$BUILD/jelly"
