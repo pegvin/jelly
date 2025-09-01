@@ -32,7 +32,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt update -y
-        sudo apt install -y gcc clang libcmark-dev
+        sudo apt install -y gcc clang
 
     - name: Generate Build Files & Build
       env:
@@ -50,3 +50,29 @@ jobs:
         name: build-linux-${{ matrix.cc }}
         if-no-files-found: error
         path: ./build/jelly
+
+  build-windows:
+    runs-on: windows-2025
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Change Git Config
+      run: git config --global core.autocrlf input
+
+    - name: Setup BusyBox
+      run: curl.exe -L "https://frippery.org/files/busybox/busybox.exe" -o ./busybox.exe
+
+    - name: Generate Build Files & Build
+      shell: cmd
+      run: |
+        # https://github.com/actions/runner-images/blob/main/images/windows/Windows2025-Readme.md#visual-studio-enterprise-2022
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+        .\busybox.exe sh -c "export CC=clang; export LD=clang; ./build.sh release"
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-windows
+        if-no-files-found: error
+        path: ./build/jelly.exe
