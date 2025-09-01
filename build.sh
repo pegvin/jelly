@@ -58,11 +58,11 @@ export CCACHE_DIR="$BUILD/.ccache"
 
 echo "$SOURCES 0" | tr ' ' '\n' | while read -r source; do
 	if [ "$source" = "0" ]; then wait; exit 0; fi
-	echo "Compiling $source"
+	echo "CC $source"
 	mkdir -p "$(dirname "$BUILD/$source.o")"
 	$CCACHE "$CC" $CFLAGS -c "$source" -o "$BUILD/$source.o" &
 	$MAYBE_WAIT
 done
 
 "$LD" $OBJECTS $LFLAGS -o "$BIN"
-echo "  Linking $BIN"
+echo "LD $BIN"

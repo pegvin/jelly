@@ -18,7 +18,7 @@ void os_memory_unreserve(void* memory, U64 size) {
 
 void os_memory_commit(void* memory, U64 size) {
 	if (VirtualAlloc(memory, size, MEM_COMMIT, PAGE_READWRITE) == NULL) {
-		os_abort_with_message(1, str8_lit("Failed to commit memory!"));
+		os_abort_with_message(1, str_lit("Failed to commit memory!"));
 	}
 }
 

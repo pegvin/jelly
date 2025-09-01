@@ -18,7 +18,7 @@ bool os_handle_is_zero(OS_Handle a) {
 
 NORETURN void os_abort_with_message(S32 exit_code, String message) {
 	#warning Implement Message Box
-	// os_show_message_box(OS_MessageBoxIcon_Error, str8_lit("Error Occurred!"), message);
+	// os_show_message_box(OS_MessageBoxIcon_Error, str_lit("Error Occurred!"), message);
 	os_abort(exit_code);
 }
 
