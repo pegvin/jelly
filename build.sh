@@ -6,7 +6,7 @@ CC=${CC:-gcc}
 LD=${LD:-gcc}
 BUILD="build"
 BIN="$BUILD/jelly"
-SOURCES="src/main.c src/os/os.c src/base/arena.c"
+SOURCES="src/main.c src/os/os.c src/base/arena.c src/base/string.c"
 OBJECTS=$(echo "$SOURCES" | sed "s|\([^ ]*\)\.c|$BUILD/\1.c.o|g")
 CFLAGS="-Isrc/ -std=c99 -Wall -Wextra -Wshadow -pedantic -ffast-math"
 LFLAGS=""
