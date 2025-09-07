@@ -8,7 +8,7 @@ BUILD="build"
 BIN="$BUILD/jelly"
 SOURCES="src/main.c src/base/os/os.c src/base/arena.c src/base/string.c"
 OBJECTS=$(echo "$SOURCES" | sed "s|\([^ ]*\)\.c|$BUILD/\1.c.o|g")
-CFLAGS="-Isrc/ -std=c99 -Wall -Wextra -Wshadow -pedantic -ffast-math"
+CFLAGS="-Isrc/ -std=c99 -Wall -Wextra -Wshadow -Wstrict-aliasing -pedantic -ffast-math"
 LFLAGS=""
 CMD=${1:-}
 
@@ -16,7 +16,8 @@ KERNEL=$(uname -s)
 MAYBE_WAIT=""
 
 if [ "$KERNEL" = "Linux" ]; then
-	CFLAGS="$CFLAGS -DTARGET_LINUX=1 -D_DEFAULT_SOURCE=1"
+	CFLAGS="$CFLAGS -DTARGET_LINUX=1 -D_DEFAULT_SOURCE=1 -fdata-sections -ffunction-sections"
+	LFLAGS="$LFLAGS -Wl,--gc-sections"
 elif [ "$KERNEL" = "Windows_NT" ] || [ "$(uname -o)" = "Cygwin" ]; then
 	CFLAGS="$CFLAGS -Ivendor/dirent/include/ -DTARGET_WINDOWS=1 -DWIN32_LEAN_AND_MEAN=1 -DWINVER=0x0601 -D_WIN32_WINNT=0x0601"
 	BIN="$BIN.exe"
@@ -33,8 +34,7 @@ elif [ "$CMD" = "bear" ]; then
 	bear --append --output "$BUILD/compile_commands.json" -- $0 # github.com/rizsotto/Bear
 	exit 0
 elif [ "$CMD" = "release" ]; then
-	CFLAGS="$CFLAGS -O3 -fdata-sections -ffunction-sections"
-	LFLAGS="$LFLAGS -Wl,--gc-sections"
+	CFLAGS="$CFLAGS -O3"
 elif [ "$CMD" = "" ]; then
 	CFLAGS="$CFLAGS -O0 -g -fsanitize=address,undefined"
 	LFLAGS="$LFLAGS -fsanitize=address,undefined"
