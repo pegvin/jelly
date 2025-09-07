@@ -19,6 +19,7 @@ static int _main(int argc, char *argv[]) {
 // Use UTF-8 Encoding on Windows instead of Windows codepage.
 #ifdef TARGET_WINDOWS
 
+#include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

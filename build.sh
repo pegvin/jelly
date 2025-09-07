@@ -19,7 +19,7 @@ if [ "$KERNEL" = "Linux" ]; then
 	CFLAGS="$CFLAGS -DTARGET_LINUX=1 -D_DEFAULT_SOURCE=1 -fdata-sections -ffunction-sections"
 	LFLAGS="$LFLAGS -Wl,--gc-sections"
 elif [ "$KERNEL" = "Windows_NT" ] || [ "$(uname -o)" = "Cygwin" ]; then
-	CFLAGS="$CFLAGS -Ivendor/dirent/include/ -DTARGET_WINDOWS=1 -DWIN32_LEAN_AND_MEAN=1 -DWINVER=0x0601 -D_WIN32_WINNT=0x0601"
+	CFLAGS="$CFLAGS -Ivendor/dirent/include/ -DTARGET_WINDOWS=1 -DVC_EXTRALEAN=1 -DWIN32_LEAN_AND_MEAN=1 -DWINVER=0x0601 -D_WIN32_WINNT=0x0601"
 	BIN="$BIN.exe"
 	# On BusyBox.exe, It seems to run out of memory if too many commands are spawned. So we just wait it out.
 	MAYBE_WAIT="wait"
