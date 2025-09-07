@@ -1,5 +1,5 @@
-#ifndef SRC_OS_OS_H
-#define SRC_OS_OS_H 1
+#ifndef SRC_BASE_OS_OS_H
+#define SRC_BASE_OS_OS_H 1
 
 #include "base/types.h"
 #include "base/math.h"
@@ -40,4 +40,4 @@ PathArray os_path_list_dir(Arena* a, String path);
 Rng1DU64  os_path_basename(String path);
 Rng1DU64  os_path_extension(String path);
 
-#endif // SRC_OS_OS_H
+#endif // SRC_BASE_OS_OS_H

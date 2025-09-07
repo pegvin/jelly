@@ -1,10 +1,10 @@
 #include <string.h>
 #include <dirent.h>
 
-#include "os/os.h"
+#include "base/os/os.h"
 
-#include "os/linux/os.c"
-#include "os/win32/os.c"
+#include "base/os/linux/os.c"
+#include "base/os/win32/os.c"
 
 OS_Handle os_handle_zero(void) {
 	OS_Handle h = {0};
