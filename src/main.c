@@ -6,7 +6,7 @@ int main(void) {
 	Arena a = arena_init();
 
 	PathArray arr = os_path_list_dir(&a, str_lit("./"));
-	printf("Found %ld entries inside ./\n", arr.count);
+	printf("Found %lu entries inside ./\n", arr.count);
 
 	for EachIndex(i, arr.count) {
 		printf(" - '%.*s'\n", (U32)arr.paths[i].size, arr.paths[i].data);
